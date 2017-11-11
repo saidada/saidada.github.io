@@ -11,7 +11,8 @@ window.onload = function (){
 
 var x = 200;
 var y = 200;
-var v = 1;
+var v = 2;
+var vp = 1;
 var r = 50;
 
 ctx.beginPath();
@@ -43,20 +44,25 @@ function kabeari(){
     var KEY_DOWN  = 40;
     var KEY_SPACE = 32;
 
-    if (ki.isDown(KEY_LEFT)) { x -= 1; }
-    if (ki.isDown(KEY_UP))   { y -= 1; }
-    if (ki.isDown(KEY_RIGHT)){ x += 1; }
-    if (ki.isDown(KEY_DOWN)) { y += 1; }
-    if (ki.isDown(KEY_SPACE)){ r += 5; }
+    if (ki.isDown(KEY_LEFT)) { v = 2; }
+    if (ki.isDown(KEY_UP))   { v = 2; }
+    if (ki.isDown(KEY_RIGHT)){ v = 2; }
+    if (ki.isDown(KEY_DOWN)) { v = 2; }
 
     if (ki.isHolding(KEY_LEFT)) { x -= v;}
     if (ki.isHolding(KEY_UP))   { y -= v;}
     if (ki.isHolding(KEY_RIGHT)){ x += v;}
     if (ki.isHolding(KEY_DOWN)) { y += v;}
-    if (ki.isHolding(KEY_SPACE)){ r = 57;  v += 1 ; }
+    if (ki.isHolding(KEY_SPACE)){ r = 55;  v += vp ; }
 
+    var vert = ki.isDown(KEY_UP) ||  ki.isDown(KEY_DOWN);
+    var horz = ki.isDown(KEY_LEFT) || ki.isDown(KEY_RIGHT);
+    if (vert && horz) {
+      x /= 1.41421356;
+      y /= 1.41421356;
+    }
 
-    if (ki.isUp(KEY_SPACE)){ r = 50;  v =  1; }
+    if (ki.isUp(KEY_SPACE)){ r = 50;  v =  vp; }
 
     kabenashi();
     maru();
